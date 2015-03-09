@@ -1,3 +1,4 @@
+coté serveur
 apt-get install  openvpn 
 
 ##Génération des différentes clés pour le serveur
@@ -24,3 +25,10 @@ cd /etc/openvpn/easy-rsa/
 ./build-key-server  server ( ou server est le nom arbitraire du serveur)
   openvpn --genkey --secret ta.key
 ./build-dh
+
+coté client
+apt-get install openvpn
+exécuter les commandes suivantes depuis le serveur pour générer la clé pour le client, le certificat du client. 
+cd /etc/openvpn/easy-rsa/
+./build-key nomclient
+
