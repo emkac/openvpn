@@ -1,0 +1,14 @@
+NAS-Identifier=OpenVpn 
+Service-Type=5 Framed-Protocol=1 
+NAS-Port-Type=5 
+NAS-IP-Address=127.0.0.1 
+OpenVPNConfig=/etc/openvpn/server.conf 
+overwriteccfiles=false 
+server {   
+         acctport=1813     
+         authport=1812     
+         name=10.100.11.26    # ip du serveur radius   
+         retry=1     
+         wait=1     
+         sharedsecret=secret partager entre le vpn et le raduis piusque le vpn est devenu NAS du radius
+}
