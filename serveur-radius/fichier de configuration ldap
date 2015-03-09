@@ -1,0 +1,21 @@
+le fichier ldap est contenu dans le dossier module sur le serveur radius.
+
+ldap {     
+      server = "127.0.0.1" # ip serveur ldap ou ip serveur replica ldap    
+      basedn = "dc=toto,dc=lan"     
+      filter = "(uid=%{%{Stripped-User-Name}:-%{User-Name}})"     
+        ldap_connections_number = 5     
+      timeout = 4     
+      timelimit = 3     
+      net_timeout = 1     
+      tls {         
+             start_tls = no     
+       }     
+        dictionary_mapping = ${confdir}/ldap.attrmap     
+      edir_account_policy_check  = no     
+      keepalive {         
+                 idle = 60         
+                 probes = 3         
+                 interval = 3     
+         } 
+ } 
