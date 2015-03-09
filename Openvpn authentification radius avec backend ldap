@@ -1,0 +1,19 @@
+1. L’utilisateur démarre le client OpenVPN et tente de se  connecte au serveur OpenVPN. 
+2. Le serveur openvpn transmet fidèlement le login et le mot de passe du client vers le serveur freeradius. 
+3. Le serveur freeradius se connecte au serveur ldap avec le compte read only afin de vérifier la présence du login et le mot de passe
+ fournie par le client. 
+4. Après vérification, soit le login et le mot de passe sont contenus dans l'annuaire et la connexion est établir, 
+  soit le login et/ou le mot de passe n'y figurent pas et le client vpn ne démarre pas.
+  
+ ### Openvpn authentification radius
+depuis le serveur openvpn, il faut installer le module servant a l'authentification.
+apt-get install openvpn-auth-radius
+
+une fois lancé, le module s'installe dans le répertoire /usr/lib/openvpn/ et le fichier de configuration par défaut est localiser dans /usr/share/doc/openvpn-auth-radius/examples/
+il faut ajouter dans le fichier server.conf du serveur openvpn le module comme suit: 
+plugin /usr/lib/openvpn/radiusplugin.so /etc/openvpn/auth/radiusplugin.cnf
+
+il faut ajouter dans le fichier client.conf du client openvpn la directive suivante:
+auth-user-pass  /etc/openvpn/auth/login
+
+
