@@ -1,0 +1,26 @@
+apt-get install  openvpn 
+
+##Génération des différentes clés pour le serveur
+depuis le serveur openvpn copier le contenu du dossier /usr/share/doc/openvpn/exemple/easy-rsa dans /etc/openvpn/easy-rsa
+se déplacer dans le dossier /etc/openvpn/easy-rsa/ pour éditer le fichier vars pour qu'il comporte les informations suivantes: 
+#####
+export KEY_COUNTRY="CI" 
+export KEY_PROVINCE="ABJ" 
+export KEY_CITY="Abidjan" 
+export KEY_ORG="Nom entreprise" 
+export KEY_EMAIL="info@nomentreprise" 
+export KEY_CN=Infra_VPN 
+export KEY_NAME=Infra VPN 
+export KEY_OU=Adminsys 
+export PKCS11_MODULE_PATH=changeme 
+export PKCS11_PIN=1234
+####
+
+exécuter le fichier vars avec la commande suivante : 
+. ./vars
+
+exécuter les commandes suivantes pour générer la clé du serveur , le certificat pour le serveur, la clé statique et la clé Diffie-Hellman 
+cd /etc/openvpn/easy-rsa/
+./build-key-server  server ( ou server est le nom arbitraire du serveur)
+  openvpn --genkey --secret ta.key
+./build-dh
